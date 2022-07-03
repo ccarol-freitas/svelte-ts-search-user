@@ -12,6 +12,7 @@
         color: #3680F4;
         
         background-image: linear-gradient(270deg, #C14FAC  -0.08%, #3680F4 100%);
+        -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
 	}
 </style>
