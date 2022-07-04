@@ -3,9 +3,6 @@
 ### Consumindo API do GitHub
 https://api.github.com/users/
 
-npm install
-npm run dev
-
 <p>Projeto criado com Svelte, tem como objetivo consumir a API do GitHub e buscar usuário do git.</p>
 
 <div>
@@ -57,5 +54,7 @@ npx degit sveltejs/template my-svelte-project
 cd my-svelte-project
 # to use TypeScript run:
 # node scripts/setupTypeScript.js
+npm install
+npm run dev
 ```
 
