@@ -15,8 +15,6 @@ https://api.github.com/users/
 </h4>
 
 ### Features
-
-- [x] Seguir o design https://www.figma.com/file/rPpQtx55A7lmll3Nh1GRXy/Svelte-Perfis
 - [x] Ao inserir informações no input, ele deve trazer o usuário do git
 
 ### Pré-requisitos
