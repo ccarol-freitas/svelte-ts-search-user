@@ -1,12 +1,6 @@
 # svelte-ts-search-user
 
-### create and started the project
-npx degit sveltejs/template my-svelte-project
-cd my-svelte-project
-# to use TypeScript run:
-# node scripts/setupTypeScript.js
-
-### consumindo api do github
+### Consumindo API do GitHub
 https://api.github.com/users/
 
 npm install
@@ -57,5 +51,11 @@ $ localhost:8080
 ### Prévia do Projeto
 ![image](https://user-images.githubusercontent.com/54582414/177078683-34adc0c2-a691-4a1f-953c-9ef1e64f31ab.png)
 
-
+```
+### create and started the project
+npx degit sveltejs/template my-svelte-project
+cd my-svelte-project
+# to use TypeScript run:
+# node scripts/setupTypeScript.js
+```
 
