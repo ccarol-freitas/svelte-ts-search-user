@@ -1,13 +1,13 @@
 
-<h1 class="title">Svelte GitHub Perfis</h1>
+<h1 class="title">GitHub Perfis</h1>
 
 
 <style>
-    .title{
+    .title {
         font-family: 'Montserrat', sans-serif;
         font-style: normal;
         font-weight: 800;
-        font-size: 38px;
+        font-size: 35px;
         line-height: 45px;
         color: #3680F4;
         

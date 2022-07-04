@@ -10,5 +10,8 @@ cd my-svelte-project
 # to use TypeScript run:
 # node scripts/setupTypeScript.js
 
+### consumindo api do github
+https://api.github.com/users/
+
 npm install
 npm run dev
