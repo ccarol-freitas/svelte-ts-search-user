@@ -1,3 +1,5 @@
+import type IRepos from './IRepos'
+
 export default interface IUser {
     login: string
     name: string
@@ -6,4 +8,5 @@ export default interface IUser {
     id: number
     followers: number
     public_repos: number
+    recent_repo: IRepos[]
 }

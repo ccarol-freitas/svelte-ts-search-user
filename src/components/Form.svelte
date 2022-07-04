@@ -1,38 +1,31 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import type IUser from "../interfaces/IUser";
+    import { searchRepos, searchUser } from "../service";
+    import assembleUser from "../utils/assembleUser";
+    import Button from "./Button.svelte";
 
     let inputValue = "";
-    let statusError: null | number = null
+    let statusError: null | number = null;
 
     const dispatch = createEventDispatcher<{
-        onChangeUser: IUser | null
+        onChangeUser: IUser | null;
     }>();
 
     async function onSubmit() {
-        const responseUser = await fetch(
-            `https://api.github.com/users/${inputValue}`
-        );
+        const responseUser = await searchUser(inputValue);
+        const responseRepos = await searchRepos(inputValue);
 
-        if(responseUser.ok){
+        if (responseUser.ok && responseRepos.ok) {
             const userData = await responseUser.json();
+            const repoData = await responseRepos.json();
 
-            console.log(userData);
-            dispatch("onChangeUser", {
-                login: userData.login,
-                name: userData.name,
-                avatar_url: userData.avatar_url,
-                profile_url: userData.profile_url,
-                id: userData.id,
-                followers: userData.followers,
-                public_repos: userData.public_repos,
-            });
-            statusError = null
+            dispatch("onChangeUser", assembleUser(userData, repoData));
+            statusError = null;
         } else {
-            statusError = responseUser.status
-            dispatch('onChangeUser', null)
+            statusError = responseUser.status;
+            dispatch("onChangeUser", null);
         }
-
     }
 </script>
 
@@ -46,12 +39,15 @@
     />
 
     <div class="container-button">
-        <button type="submit" class="button-search">Buscar</button>
+        <Button>
+            Buscar
+            <img src="/assets/lupa.svg" alt="Ícon de busca" />
+        </Button>
     </div>
 </form>
 
 {#if statusError === 404}
-<span class="error">Usuário não encontrado!</span>
+    <span class="error">Usuário não encontrado!</span>
 {/if}
 
 <style>
@@ -89,37 +85,16 @@
         color: #6e8cba;
     }
 
-    .button-search {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-
-        background: #c14fac;
-        border-radius: 8px;
-        padding: 15px 24px;
-        transition: background-color 0.2s;
-        border: none;
-        width: 154px;
-
-        font-family: "Montserrat", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 22px;
-        line-height: 26px;
-        color: #ffffff;
-    }
-
     .error {
         font-family: "Montserrat", sans-serif;
         font-style: italic;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
-        color: #FF003E;
+        color: #ff003e;
     }
 
     .error-input {
-        border: 1px solid #FF003E;
+        border: 1px solid #ff003e;
     }
 </style>

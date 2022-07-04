@@ -1,47 +1,77 @@
 <script lang="ts">
-    import type IUser from "../interfaces/IUser";
-    import TopBar from "./TopBar.svelte";
+	import type IUser from "../interfaces/IUser";
+	import TopBar from "./TopBar.svelte";
 
-    export let user: IUser
+	export let user: IUser;
+
+	let haveRepo: Boolean;
+
+	// $ sintase de rotulo, funciona como um useffect que é para deixar ele reativo
+	// poremos usar de duas formas
+	// $: haveRepo = Boolean(user.recent_repo.length)
+
+	$: {
+		haveRepo = Boolean(user.recent_repo.length);
+		console.log(haveRepo);
+	}
 </script>
 
 <div class="card-user">
-    <TopBar />
+	<TopBar />
 
-    <div class="container-user">
-        <div class="container-image">
-            <a href={user.profile_url} target="_blank" rel="noopener">
-                <div
-                    class="image-user"
-                    style:background-image="url({user.avatar_url})"
-                />
-            </a>
-        </div>
+	<div class="container-user">
+		<div class="container-image">
+			<a href={user.profile_url} target="_blank" rel="noopener">
+				<div
+					class="image-user"
+					style:background-image="url({user.avatar_url})"
+				/>
+			</a>
+		</div>
 
-        <div class="details-user">
+		<div class="details-user">
 			{#if user.name}
-            <div class="info">
-                Nome: <span>{user.name}</span>
-            </div>
+				<div class="info">
+					Nome: <span>{user.name}</span>
+				</div>
 			{/if}
 
-            <div class="info">
-                Usuário: <span>{user.login}</span>
-            </div>
+			<div class="info">
+				Usuário: <span>{user.login}</span>
+			</div>
 
-            <div class="info">
-                Seguidores: <span>{user.followers}</span>
-            </div>
+			<div class="info">
+				Seguidores: <span>{user.followers}</span>
+			</div>
 
-            <div class="info">
-                Repositórios: <span>{user.public_repos}</span>
-            </div>
-        </div>
-    </div>
+			<div class="info">
+				Repositórios: <span>{user.public_repos}</span>
+			</div>
+		</div>
+
+		{#if haveRepo}
+			<div class="repositorys">
+				<h2 class="title">Repositórios Rescentes</h2>
+
+				<ul>
+					{#each user.recent_repo as repo}
+						<li>
+							<a
+								href={repo.url}
+								target="_blank"
+								rel="noopener"
+								class="repository">{repo.name}</a
+							>
+						</li>
+					{/each}
+				</ul>
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
-    .card-user {
+	.card-user {
 		margin-top: 65px;
 	}
 
@@ -84,5 +114,19 @@
 	.details-user > .info > span {
 		color: #6781a8;
 		font-weight: normal;
+	}
+
+	.repositorys > .title {
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 31px;
+		color: #395278;
+	}
+
+	.repository {
+		font-size: 20px;
+		line-height: 31px;
+		color: #6781a8;
+		transition: color 0.2s;
 	}
 </style>

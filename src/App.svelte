@@ -6,10 +6,9 @@
 
 	let user: IUser | null = null;
 
-	function setUser(event: CustomEvent<IUser | null>){
-		user = event.detail
+	function setUser(event: CustomEvent<IUser | null>) {
+		user = event.detail;
 	}
-
 </script>
 
 <div class="app">
@@ -17,12 +16,12 @@
 		<Title />
 
 		<div class="search-user">
-			<Form on:onChangeUser={setUser}/>
+			<Form on:onChangeUser={setUser} />
 		</div>
 	</header>
 
 	{#if user}
-		<User {user}/>
+		<User {user} />
 	{/if}
 </div>
 
@@ -41,5 +40,4 @@
 		position: relative;
 		width: 70%;
 	}
-
 </style>
